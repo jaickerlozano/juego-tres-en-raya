@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "checkboard.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
+    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "sass": "^1.93.2",
     "vite": "^7.1.12"
   }
 }

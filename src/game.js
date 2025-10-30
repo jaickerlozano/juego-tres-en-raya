@@ -1,7 +1,10 @@
 import { revisarTablero } from './checkboard.js';
+import { tablero } from './dom.js';
+
+tablero();
 
 // Función tablero de juego
-function gameboard() {
+export function gameboard() {
     return {
         gameboard : [
             ' ', ' ', ' ', 
@@ -34,11 +37,11 @@ function gameboard() {
     };
 }
 
-function player(name, mark) {
+export function player(name, mark) {
     return {name, mark};
 }
 
-function gameController() {
+export function gameController() {
     // Tablero
     let board = gameboard();
 
@@ -86,13 +89,9 @@ function gameController() {
         amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
 
         // Mientras existan jugadas y no exista un ganador se repite el ciclo
-    } while (amountEmpty !== 0 && !salir);
+    } while (amountEmpty !== 8 && !salir);
 
     if (salir) {
         console.log(`Felicidades ${playerTurn.name} has ganado 🎉`);
     }
 }
-
-// caso de uso
-
-gameController();

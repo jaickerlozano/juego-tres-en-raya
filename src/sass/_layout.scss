@@ -1,0 +1,75 @@
+/* 🎯 Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #222831;
+  font-family: 'Poppins', sans-serif;
+  color: #eeeeee;
+}
+
+/* 🧩 Título */
+h1 {
+  color: #00adb5;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* 🎮 Contenedor principal del tablero */
+#container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(100px, 120px));
+  grid-template-rows: repeat(3, minmax(100px, 120px));
+  gap: 8px;
+  background-color: #393e46;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 🟩 Celdas del tablero */
+.celda {
+  display: grid;
+  place-items: center;
+  background-color: #eeeeee;
+  color: #222831;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #00adb5;
+    color: #fff;
+    transform: scale(1.05);
+  }
+}
+
+/* 🧹 Botón de reinicio (opcional) */
+button {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #00adb5;
+  color: #eeeeee;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #02c4ce;
+  }
+}
