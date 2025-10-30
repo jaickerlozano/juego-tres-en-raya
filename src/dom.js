@@ -81,23 +81,18 @@ export function buttons() {
             form.append(mark);
         }
 
-        // Se crea el button aceptar nombre de jugadores
-        const acceptButton = buttonCreate('button', 'accept', 'button', 'Aceptar');
-        form.append(acceptButton);
-
         // Form para ingresar los datos de los jugadores
         document.body.appendChild(form);
 
-        acceptButton.addEventListener('click', () => {
-            const player1 = form.elements[0].value.trim();
-            const player2 = form.elements[1].value.trim();
+        // Se crea el botón aceptar con tipo submit
+        const acceptButton = buttonCreate('submit', 'accept', 'button', 'Aceptar');
+        form.append(acceptButton);
 
-            if (!player1 || !player2) {
-                alert('Por favor, ingresa ambos nombres antes de continuar.');
-                return;
-            }
-
-            const players = [player1, player2];
+        // Evento al enviar el formulario
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // evita que la página se recargue
+            
+            const players = [form.elements[0].value, form.elements[1].value];
             players.forEach((player, i) => {
                 const mark = i === 0 ? 'X' : 'O';
                 playerInsert(player, mark);
@@ -105,5 +100,6 @@ export function buttons() {
 
             form.remove();
         });
+
     })
 }
