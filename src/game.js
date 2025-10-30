@@ -1,7 +1,8 @@
 import { revisarTablero } from './checkboard.js';
-import { tablero } from './dom.js';
+import { buttons, tablero } from './dom.js';
 
 tablero();
+buttons();
 
 // Función tablero de juego
 export function gameboard() {
