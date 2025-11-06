@@ -116,3 +116,13 @@ form {
         }
     }
 }
+
+.ganador {
+  position: absolute;
+  font-size: 50px;
+  color: #02c4ce;
+  background-color: #222831;
+  padding: 10px;
+  border: 5px #00adb5 solid;
+  border-radius: 10px;
+}

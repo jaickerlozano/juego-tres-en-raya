@@ -1,8 +1,6 @@
 import { revisarTablero } from './checkboard.js';
-import { buttons, tablero } from './dom.js';
+import { tablero, buttons } from './dom.js';
 
-tablero();
-buttons();
 
 // Función tablero de juego
 export function gameboard() {
@@ -23,8 +21,32 @@ export function gameboard() {
         },
 
         // Función para marcar en el tablero
-        addMark: function(position ,mark) {
-            this.gameboard[position] = mark;
+        addMark: function(position, mark) {
+            position.textContent = mark;
+        },
+
+        // Función iniciar juego
+        renderBoard: function() {
+            tablero();
+            buttons();
+        },
+
+        startBoard: function(inicioButton) {
+            // Se obtiene 
+            return document.getElementById('playersContainer')
+        },
+
+        stateBoard: function(salir, ganador, amountEmpty, contenedorTablero) {
+            if (salir) {
+                console.log('Felicidades has ganado');
+                const message = document.createElement('p');
+                message.classList.add('ganador');
+                message.textContent = `Felicidades ${ganador} has ganado 🎉`
+                document.body.append(message);
+                contenedorTablero.inert = true;
+            }
+            
+            if (amountEmpty === 1) console.log('No hay ganador');
         },
 
         // Función para reiniciar juego
@@ -42,57 +64,78 @@ export function player(name, mark) {
     return {name, mark};
 }
 
+// Función para determinar los turnos del jugador
+export function turnPlayer(player1, player2) {
+    let playerTurn; // Turno del jugador
+    if (!player1.classList.contains('turno')) {
+        player2.classList.remove('turno');
+        player1.classList.add('turno');
+        playerTurn = player1; // Fijar turno por primera vez
+        return {
+            player: playerTurn.id,
+            mark: 'X'
+        };
+    } else {
+        // Alternar turno
+        player1.classList.remove('turno')
+        player2.classList.add('turno')
+        playerTurn = player2;
+        return {
+            player: playerTurn.id,
+            mark: 'O'
+        };
+    };
+}
+
 export function gameController() {
     // Tablero
     let board = gameboard();
 
-    // Players
-    const player1 = player('Jai' , 'X');
-    const player2 = player('Ely', 'O');
+    board.renderBoard();
 
-    // Cantidad de casillas libres
-    let amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
+    let player1;
+    let player2;
+    let play;
 
-    let playerTurn; // Turno del jugador
+    // Eventos boton iniciar
+    const inicioButton = document.getElementById('iniciar');
+    inicioButton.addEventListener('click', () => {
+        inicioButton.classList.add('active')
+        containerBoard.inert = false;
+    })
 
-    let salir = false; // Variable para indicar salida cuando haya un ganador
-    do {
-
-        // Turnos
-        if (amountEmpty === 9) {
-            playerTurn = player1; // Fijar turno por primera vez
-
-        } else {
-            // Alternar turno
-            playerTurn = playerTurn.name === player1.name ? player2 : player1;
-        };
+    // Eventos boton reset
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', () => {
         
-        // Ingreso de jugada por consola
-        const position = Number(prompt(`Turno de ${playerTurn.name}, ingresa posición`));
+    })
 
-        // Revisión de posición
-        if (board.gameboard[position].includes('X') || board.gameboard[position].includes('O')) {
-            console.log('posición ocupada. Intente en otra posición');
-            // Alternar turno
-            playerTurn = playerTurn.name === player1.name ? player2 : player1;
-            continue;
+    // Eventos tablero de juego
+    const containerBoard = document.getElementById('container');
+    containerBoard.inert = true;
+    containerBoard.addEventListener('click', (event)=> {
+        // Inicia partida
+        if(inicioButton.classList.contains('active')) {
+            player1 = board.startBoard(inicioButton).children[0];
+            player2 = board.startBoard(inicioButton).children[1];
+            inicioButton.classList.toggle('active');
         }
 
-        // Marcar posición
-        board.addMark(position, playerTurn.mark);
+        // Cantidad de casillas libres
+        let amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
 
-        // Revisar si hay tres en raya
+        let salir = false; // Variable para indicar salida cuando haya un ganador
+
+        if (event.target.textContent !== 'X' && event.target.textContent !== 'O') {
+            play = turnPlayer(player1, player2); // Turnos
+            board.addMark(event.target, play.mark);
+            const position = Number(event.target.id.replace('espacio', ''));
+            board.gameboard[position - 1] = play.mark;
+            console.log(board.gameboard)
+        } 
+
         salir = revisarTablero(board.gameboard);
 
-        console.log(board.getTablero())
-
-        // Revisar cantidad de jugadas disponibles
-        amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
-
-        // Mientras existan jugadas y no exista un ganador se repite el ciclo
-    } while (amountEmpty !== 8 && !salir);
-
-    if (salir) {
-        console.log(`Felicidades ${playerTurn.name} has ganado 🎉`);
-    }
+        board.stateBoard(salir, play.player, amountEmpty, containerBoard);
+    })
 }

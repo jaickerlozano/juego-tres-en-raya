@@ -16,6 +16,7 @@ export function tablero() {
         celda.classList.add('celda');
         boardContainer.appendChild(celda);
     }
+    return boardContainer;
 }
 
 // Función para crear botones
@@ -30,7 +31,7 @@ function buttonCreate(type, id, classe, textcontent, element = 'button') {
 }
 
 // Función para crear jugadores
-function playerInsert(name, mark) {
+function playerInsert(name, mark, numero) {
     // Se obtiene el contenedor principal
     const container = document.getElementById('container');
     
@@ -39,6 +40,7 @@ function playerInsert(name, mark) {
 
     // Se crean los jugadores
     const playerName = document.createElement('p');
+    playerName.id = `player${numero}`
     playerName.textContent = `Jugador: ${name} - Marca: ${mark}`;
 
     playersContainer.appendChild(playerName);
@@ -58,10 +60,14 @@ export function buttons() {
 
     // Eventos con el boton Iniciar
     startButton.addEventListener('click', () =>{
+        // Se inhabilita el boton inciar
+        startButton.classList.add('disabled');
+        startButton.disabled = true;
+
         // Se crea un formulario 
         const form = document.createElement('form');
         form.classList.add('form');
-        
+
         // Se crean las entradas
         for (let i = 0; i < 2; i++) {
             const nameLabel = document.createElement('label'); // Se crea el label
@@ -92,14 +98,13 @@ export function buttons() {
         form.addEventListener('submit', (event) => {
             event.preventDefault(); // evita que la página se recargue
             
-            const players = [form.elements[0].value, form.elements[1].value];
+            const players = [form.elements[0].value.trim(), form.elements[1].value.trim()];
             players.forEach((player, i) => {
                 const mark = i === 0 ? 'X' : 'O';
-                playerInsert(player, mark);
+                playerInsert(player, mark, i+1);
             });
 
             form.remove();
         });
-
     })
 }
