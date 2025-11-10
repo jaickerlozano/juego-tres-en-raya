@@ -126,6 +126,3 @@ Ejemplo:
 
 Ayúdame dejando una estrella ⭐ en el repositorio
 y compártelo en tus redes 🙌
-
-
-para que muestre tu imagen real.
