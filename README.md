@@ -88,6 +88,8 @@ npm run build
  ```bash
 npm run deploy
  ```
+---
+
 🎨 Mejoras y animaciones
 
 ✨ Animación de resultado:
@@ -108,11 +110,15 @@ El tablero se limpia y vuelve al estado inicial sin refrescar la página, manten
 💾 Uso de inert para controlar estados interactivos
 🚀 Configuración y despliegue con Vite + GitHub Pages
 
+---
+
 📸 Capturas del proyecto
 
-![Vista del tablero](./img/tresenraya-preview.png)
-
 Ejemplo:
+
+![Vista del tablero](./src/img/tresenraya-preview.png)
+
+---
 
 👨‍💻 Autor
 
@@ -121,6 +127,8 @@ Ejemplo:
 - 💼 [LinkedIn](https://www.linkedin.com/in/jaicker-rafael-lozano-flores-970197264)
 - 🐙 [GitHub](https://github.com/jaickerlozano)
 - ✉️ Email: jlozano.dev@gmail.com
+
+---
 
 ⭐ Si te gustó este proyecto…
 
