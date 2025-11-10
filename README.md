@@ -117,14 +117,10 @@ Ejemplo:
 👨‍💻 Autor
 
 👤 Jaicker Lozano
-
 📍 Desarrollador Full Stack en formación
-
-💼 LinkedIn: https://www.linkedin.com/in/jaicker-rafael-lozano-flores-970197264/
-
-💻 Portfolio: https://jaickerlozano.github.io/portfolio-jaicker/
-
-📧 jlozano.dev@gmail.com
+- 💼 [LinkedIn](https://www.linkedin.com/in/jaicker-rafael-lozano-flores-970197264)
+- 🐙 [GitHub](https://github.com/jaickerlozano)
+- ✉️ Email: jlozano.dev@gmail.com
 
 ⭐ Si te gustó este proyecto…
 
