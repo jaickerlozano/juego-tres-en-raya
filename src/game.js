@@ -37,16 +37,20 @@ export function gameboard() {
         },
 
         stateBoard: function(salir, ganador, amountEmpty, contenedorTablero) {
+            const message = document.createElement('p');
+            message.classList.add('final');
+
             if (salir) {
-                console.log('Felicidades has ganado');
-                const message = document.createElement('p');
-                message.classList.add('ganador');
                 message.textContent = `Felicidades ${ganador} has ganado 🎉`
                 document.body.append(message);
                 contenedorTablero.inert = true;
             }
             
-            if (amountEmpty === 1) console.log('No hay ganador');
+            if (amountEmpty === 1) {
+                message.textContent = `¡Ha sido un empate!`
+                document.body.append(message);
+                contenedorTablero.inert = true;
+            } 
         },
 
         // Función para reiniciar juego
@@ -55,7 +59,7 @@ export function gameboard() {
                 ' ', ' ', ' ', 
                 ' ', ' ', ' ', 
                 ' ', ' ', ' '
-            ];
+            ]
         }
     };
 }
@@ -72,7 +76,7 @@ export function turnPlayer(player1, player2) {
         player1.classList.add('turno');
         playerTurn = player1; // Fijar turno por primera vez
         return {
-            player: playerTurn.id,
+            player: playerTurn.textContent.split(' ')[1],
             mark: 'X'
         };
     } else {
@@ -81,7 +85,7 @@ export function turnPlayer(player1, player2) {
         player2.classList.add('turno')
         playerTurn = player2;
         return {
-            player: playerTurn.id,
+            player: playerTurn.textContent.split(' ')[1],
             mark: 'O'
         };
     };
@@ -104,12 +108,6 @@ export function gameController() {
         containerBoard.inert = false;
     })
 
-    // Eventos boton reset
-    const resetButton = document.getElementById('reset');
-    resetButton.addEventListener('click', () => {
-        
-    })
-
     // Eventos tablero de juego
     const containerBoard = document.getElementById('container');
     containerBoard.inert = true;
@@ -124,7 +122,8 @@ export function gameController() {
         // Cantidad de casillas libres
         let amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
 
-        let salir = false; // Variable para indicar salida cuando haya un ganador
+        // Solo continúa si el clic fue sobre una celda
+        if (!event.target.matches('.celda')) return;
 
         if (event.target.textContent !== 'X' && event.target.textContent !== 'O') {
             play = turnPlayer(player1, player2); // Turnos
@@ -134,8 +133,40 @@ export function gameController() {
             console.log(board.gameboard)
         } 
 
+        let salir = false; // Variable para indicar salida cuando haya un ganador
         salir = revisarTablero(board.gameboard);
 
         board.stateBoard(salir, play.player, amountEmpty, containerBoard);
     })
+
+    // --- BOTÓN REINICIAR ---
+    const resetButton = document.getElementById('reset');
+
+    resetButton.addEventListener('click', () => {
+        // 1️⃣ Reinicia el array del tablero
+        board.resetTablero();
+
+        // 2️⃣ Limpia el tablero en pantalla
+        const celdas = containerBoard.querySelectorAll('.celda');
+        celdas.forEach(celda => celda.textContent = '');
+
+        // 3️⃣ Borra jugadores del DOM
+        const playersContainer = document.getElementById('playersContainer');
+        if (playersContainer) playersContainer.innerHTML = '';
+
+        // 4️⃣ Borra mensaje de ganador si existe
+        const mensaje = document.querySelector('.final');
+        if (mensaje) mensaje.remove();
+
+        // 5️⃣ Bloquea el tablero nuevamente hasta iniciar
+        containerBoard.inert = true;
+
+        // 6️⃣ Habilita el botón "Iniciar" otra vez
+        const inicioButton = document.getElementById('iniciar');
+        inicioButton.classList.remove('disabled', 'active');
+        inicioButton.disabled = false;
+
+        console.clear();
+        console.log('Juego reiniciado');
+    });
 }

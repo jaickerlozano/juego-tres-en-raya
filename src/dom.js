@@ -1,3 +1,5 @@
+import { gameboard } from "./game";
+
 // Contenedores
 const boardContainer = document.getElementById('container'); // Contenedor del tablero
 
