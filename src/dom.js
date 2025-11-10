@@ -80,6 +80,7 @@ export function buttons() {
             playerInput.type = 'text';
             playerInput.id = `name${i+1}`;
             playerInput.required = true;
+            playerInput.placeholder = 'Ingresa tu nombre';
 
             const mark = document.createElement('p');
             mark.textContent = i === 0 ? 'Jugador 1 = X' : 'Jugador 2 = O'; // Elige la marca del jugador

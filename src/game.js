@@ -46,7 +46,7 @@ export function gameboard() {
                 contenedorTablero.inert = true;
             }
             
-            if (amountEmpty === 1) {
+            if (amountEmpty === 0) {
                 message.textContent = `¡Ha sido un empate!`
                 document.body.append(message);
                 contenedorTablero.inert = true;
@@ -63,10 +63,6 @@ export function gameboard() {
         }
     };
 }
-
-// export function player(name, mark) {
-//     return {name, mark};
-// }
 
 function actualizarHover(container, mark) {
   const celdas = container.querySelectorAll('.celda');
@@ -112,6 +108,7 @@ export function gameController() {
     let player1;
     let player2;
     let play;
+    let amountEmpty;
 
     // Eventos boton iniciar
     const inicioButton = document.getElementById('iniciar');
@@ -130,9 +127,6 @@ export function gameController() {
             player2 = board.startBoard(inicioButton).children[1];
             inicioButton.classList.toggle('active');
         }
-
-        // Cantidad de casillas libres
-        let amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
 
         // Solo continúa si el clic fue sobre una celda
         if (!event.target.matches('.celda')) return;
@@ -156,6 +150,8 @@ export function gameController() {
         let salir = false; // Variable para indicar salida cuando haya un ganador
         salir = revisarTablero(board.gameboard);
 
+        // Cantidad de casillas libres
+        amountEmpty = board.gameboard.filter((cell) => cell === ' ').length;
         board.stateBoard(salir, play.player, amountEmpty, containerBoard);
     })
 
@@ -172,6 +168,7 @@ export function gameController() {
         celdas.forEach(celda => {
             if(celda.classList.contains('played')) celda.classList.remove('played');
         });
+        celdas.forEach(celda => celda.classList.remove('hover-x', 'hover-o'));
 
         // 3️⃣ Borra jugadores del DOM
         const playersContainer = document.getElementById('playersContainer');

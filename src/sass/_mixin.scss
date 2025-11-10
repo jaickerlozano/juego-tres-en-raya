@@ -1,0 +1,30 @@
+@mixin flash-animation {
+    animation: flash 2s infinite alternate;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 0, 0.2);
+  }
+  25% {
+    opacity: 0.85;
+    box-shadow: 0 0 10px 3px rgba(255, 255, 0, 0.4); // Efecto de resplandor
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 10px 3px rgba(255, 255, 0, 0.6); // Efecto de resplandor
+  }
+  75% {
+    opacity: 0.85;
+    box-shadow: 0 0 10px 3px rgba(255, 255, 0, 0.4); // Efecto de resplandor
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 2px 2px 2px 1px rgba(255, 255, 0, 0.2);
+  }
+}
+
+.element-to-flash {
+  @include flash-animation;
+}

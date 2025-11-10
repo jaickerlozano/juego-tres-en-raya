@@ -1,3 +1,5 @@
+@use './mixin' as *;
+
 /* 🎯 Reset básico */
 * {
   margin: 0;
@@ -139,4 +141,5 @@ form {
   padding: 10px;
   border: 5px #00adb5 solid;
   border-radius: 10px;
+  @include flash-animation;
 }
