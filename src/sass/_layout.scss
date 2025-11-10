@@ -49,11 +49,25 @@ h1 {
   aspect-ratio: 1 / 1;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
-    background-color: #00adb5;
-    color: #fff;
-    transform: scale(1.05);
-  }
+  // &:hover {
+  //   background-color: #00adb5;
+  //   color: #fff;
+  //   transform: scale(1.05);
+  // }
+}
+
+/* Colores de hover dinámicos */
+.celda.hover-x:hover {
+  background-color: rgba(0, 81, 255, 0.3); // azul claro para jugador X
+}
+
+.celda.hover-o:hover {
+  background-color: rgba(255, 100, 167, 0.4); // rojo claro para jugador O
+}
+
+/* Cuando la celda ya está jugada */
+.celda.played {
+  cursor: not-allowed;
 }
 
 /* 🎛️ Botones */

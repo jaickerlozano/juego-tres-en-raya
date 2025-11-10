@@ -64,8 +64,20 @@ export function gameboard() {
     };
 }
 
-export function player(name, mark) {
-    return {name, mark};
+// export function player(name, mark) {
+//     return {name, mark};
+// }
+
+function actualizarHover(container, mark) {
+  const celdas = container.querySelectorAll('.celda');
+
+  celdas.forEach(celda => {
+    // Si la celda no está jugada, actualiza su color de hover según el turno
+    if (!celda.classList.contains('played')) {
+      celda.classList.remove('hover-x', 'hover-o');
+      celda.classList.add(mark === 'X' ? 'hover-x' : 'hover-o');
+    }
+  });
 }
 
 // Función para determinar los turnos del jugador
@@ -126,11 +138,19 @@ export function gameController() {
         if (!event.target.matches('.celda')) return;
 
         if (event.target.textContent !== 'X' && event.target.textContent !== 'O') {
-            play = turnPlayer(player1, player2); // Turnos
+            // Turnos
+            play = turnPlayer(player1, player2); 
+
+            // 🔹 Antes de marcar, actualiza el color de hover para las celdas vacías
+            actualizarHover(containerBoard, play.mark);
+
+            // Añadir marca en la celda clickeada
             board.addMark(event.target, play.mark);
             const position = Number(event.target.id.replace('espacio', ''));
             board.gameboard[position - 1] = play.mark;
-            console.log(board.gameboard)
+
+            // Bloquear celda jugada
+            event.target.classList.add('played');
         } 
 
         let salir = false; // Variable para indicar salida cuando haya un ganador
@@ -149,6 +169,9 @@ export function gameController() {
         // 2️⃣ Limpia el tablero en pantalla
         const celdas = containerBoard.querySelectorAll('.celda');
         celdas.forEach(celda => celda.textContent = '');
+        celdas.forEach(celda => {
+            if(celda.classList.contains('played')) celda.classList.remove('played');
+        });
 
         // 3️⃣ Borra jugadores del DOM
         const playersContainer = document.getElementById('playersContainer');
