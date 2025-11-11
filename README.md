@@ -39,6 +39,9 @@ El objetivo principal fue construir el juego primero en consola, luego trasladar
 
 ## 🗂️ Estructura del proyecto
 
+## 🗂️ Estructura del proyecto
+
+```bash
 📦 tres-en-raya
 ├── 📂 dist
 │   ├── 📂 assets
@@ -60,6 +63,7 @@ El objetivo principal fue construir el juego primero en consola, luego trasladar
 │       └── 📄 styles.scss
 └── 📄 vite.config.js
 
+```
 ---
 
 ## ⚙️ Instalación y ejecución local
