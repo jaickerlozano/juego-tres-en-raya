@@ -126,7 +126,7 @@ El tablero se limpia y vuelve al estado inicial sin refrescar la página, manten
 📍 Desarrollador Full Stack en formación
 - 💼 [LinkedIn](https://www.linkedin.com/in/jaicker-rafael-lozano-flores-970197264)
 - 🐙 [GitHub](https://github.com/jaickerlozano)
-- ✉️ Email: jlozano.dev@gmail.com
+- ✉️ Email: jlozano.devcode@gmail.com
 
 ---
 
