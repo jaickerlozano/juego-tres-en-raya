@@ -39,8 +39,6 @@ El objetivo principal fue construir el juego primero en consola, luego trasladar
 
 ## 🗂️ Estructura del proyecto
 
-## 🗂️ Estructura del proyecto
-
 ```bash
 📦 tres-en-raya
 ├── 📂 dist
