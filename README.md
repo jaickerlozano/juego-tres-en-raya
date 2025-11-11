@@ -118,8 +118,6 @@ El tablero se limpia y vuelve al estado inicial sin refrescar la página, manten
 
 📸 Capturas del proyecto
 
-Ejemplo:
-
 ![Vista del tablero](./src/img/tresenraya-preview.png)
 
 ---
